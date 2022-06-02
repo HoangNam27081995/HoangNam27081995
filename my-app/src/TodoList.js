@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TodoList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { toDotaskSlice } from "./store/taskSlice";
@@ -6,8 +6,7 @@ import FormUpdate from "./FormUpdate";
 
 function TodoList() {
   const dispatch = useDispatch();
-  const listTask = useSelector((state) => state.taskSlice);
-  console.log(listTask);
+  let listTask = useSelector((state) => state.taskSlice);
   const handleRemove = (id) => {
     dispatch(toDotaskSlice.deleteTodo(id));
   };
@@ -17,12 +16,16 @@ function TodoList() {
   const handleChecked = (id) => {
     dispatch(toDotaskSlice.updateCheckedTodo(id));
   };
+  const handleSearch = (e) => {
+    dispatch(toDotaskSlice.searchTodo(e.target.value));
+  };
   return (
     <>
       <input
         type="text"
         className="form-control mt-2"
         placeholder="Search..."
+        onChange={handleSearch}
       />
       {listTask.map((item, index) => {
         return (
@@ -65,6 +68,7 @@ function TodoList() {
           </div>
         );
       })}
+      
     </>
   );
 }

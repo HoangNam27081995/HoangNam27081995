@@ -25,8 +25,17 @@ const taskSlice = createSlice({
                      item.Priority = action.payload.Priority;
                      item.checkedDetail = false;   
                 }
+                return state;
             })
-            
+        },
+        searchTodo(state,action){
+           state.filter((item) => {
+               if(action.payload === ""){
+                   return state;
+               }else if (item.titleTask.toLowerCase().includes(action.payload.toLowerCase())){
+                   return item
+               }
+           })
         },
         deleteTodo(state,action){
             const removeTodo = action.payload;

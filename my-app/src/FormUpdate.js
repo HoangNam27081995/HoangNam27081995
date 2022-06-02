@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {useDispatch} from "react-redux";
 import { toDotaskSlice } from "./store/taskSlice";
 import "./formUpdate.css";
-
 function FormUpdate({ id, titleTask, dueDate, Description, Priority }) {
   const dispatch = useDispatch();
   const [taskUpdate, setTaskUpdate] = useState({
@@ -12,7 +11,7 @@ function FormUpdate({ id, titleTask, dueDate, Description, Priority }) {
     Description: Description,
     Priority: Priority,
   });
-  console.log(taskUpdate);
+  // console.log(taskUpdate);
   const handleTaskupDate = (e) =>{
     const {name,value}= e.target;
     console.log(e.target.value);
