@@ -14,3 +14,18 @@
 .row .col-6 h6{
   text-align:left;
 }
+.Footer{
+  position:relative;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  background-color:gray;
+  bottom: -60%;
+  height: 55px;
+}
+.Footer p{
+  display:flex;
+  align-items:center;
+  text-align: center;
+  margin-bottom: 0;
+};

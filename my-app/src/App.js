@@ -13,7 +13,11 @@ function App() {
       <div className="todoList col">
         TodoList
         <TodoList/>
-        <div>hello</div>
+        <div className="Footer">
+          <p className="col-3"> Bulk Action </p>
+           <button className="btn btn-primary col-2">Done</button>
+           <button className="btn btn-danger col-2">Remove</button>
+        </div>
       </div>
       </div>
     </div>
