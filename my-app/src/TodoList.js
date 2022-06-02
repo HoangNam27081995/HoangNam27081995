@@ -7,9 +7,6 @@ import FormUpdate from "./FormUpdate";
 function TodoList() {
   const dispatch = useDispatch();
   const listTask = useSelector((state) => state.taskSlice);
-  const [listTaskState, setListTaskState] = useState([]);
-  const [originalState, setOriginalState] = useState([]);
-
   const handleRemove = (id) => {
     dispatch(toDotaskSlice.deleteTodo(id));
   };
@@ -20,13 +17,13 @@ function TodoList() {
     dispatch(toDotaskSlice.updateCheckedTodo(id));
   };
   const handleSearch = (e) => {
-    const newListTaskState = [...listTaskState].filter((item) =>
-      item.titleTask.toLowerCase().includes(e.target.value)
-    );
-    const finalListTask = !!e.target.value.length
-      ? newListTaskState
-      : originalState;
-    setListTaskState(finalListTask)
+    // const newListTaskState = [...listTaskState].filter((item) =>
+    //   item.titleTask.toLowerCase().includes(e.target.value)
+    // );
+    // const finalListTask = !!e.target.value.length
+    //   ? newListTaskState
+    //   : originalState;
+    // setListTaskState(finalListTask)
   };
   return (
     <>
@@ -36,7 +33,7 @@ function TodoList() {
         placeholder="Search..."
         onChange={handleSearch}
       />
-      {listTaskState.map((item, index) => {
+      {listTask.map((item, index) => {
         return (
           <div key={index}>
             <div
