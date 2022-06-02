@@ -28,15 +28,6 @@ const taskSlice = createSlice({
                 return state;
             })
         },
-        searchTodo(state,action){
-           state.filter((item) => {
-               if(action.payload === ""){
-                   return state;
-               }else if (item.titleTask.toLowerCase().includes(action.payload.toLowerCase())){
-                   return item
-               }
-           })
-        },
         deleteTodo(state,action){
             const removeTodo = action.payload;
             state = state.filter(item => item.id !== removeTodo);

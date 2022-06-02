@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{ useState} from "react";
 import "./TodoList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { toDotaskSlice } from "./store/taskSlice";
@@ -6,7 +6,10 @@ import FormUpdate from "./FormUpdate";
 
 function TodoList() {
   const dispatch = useDispatch();
-  let listTask = useSelector((state) => state.taskSlice);
+  const listTask = useSelector((state) => state.taskSlice);
+  const [listTaskState, setListTaskState] = useState([]);
+  const [originalState, setOriginalState] = useState([]);
+
   const handleRemove = (id) => {
     dispatch(toDotaskSlice.deleteTodo(id));
   };
@@ -17,7 +20,13 @@ function TodoList() {
     dispatch(toDotaskSlice.updateCheckedTodo(id));
   };
   const handleSearch = (e) => {
-    dispatch(toDotaskSlice.searchTodo(e.target.value));
+    const newListTaskState = [...listTaskState].filter((item) =>
+      item.titleTask.toLowerCase().includes(e.target.value)
+    );
+    const finalListTask = !!e.target.value.length
+      ? newListTaskState
+      : originalState;
+    setListTaskState(finalListTask)
   };
   return (
     <>
@@ -27,7 +36,7 @@ function TodoList() {
         placeholder="Search..."
         onChange={handleSearch}
       />
-      {listTask.map((item, index) => {
+      {listTaskState.map((item, index) => {
         return (
           <div key={index}>
             <div

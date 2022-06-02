@@ -9,7 +9,7 @@ function NewTask() {
   const [task, setTask] = useState({
     id:"",
     titleTask: "",
-    dueDate: "",
+    dueDate:new Date().toISOString().slice(0,10),
     Priority: "",
     Description: "",
   });
