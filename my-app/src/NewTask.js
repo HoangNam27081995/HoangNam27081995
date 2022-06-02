@@ -83,6 +83,7 @@ function NewTask() {
                 name="dueDate"
                 onChange={handleTask}
                 value={task.dueDate}
+                min="2022-06-02"
               />
               <p>{ validatorMsg.dueDate}</p>
             </div>

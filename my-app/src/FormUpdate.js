@@ -51,6 +51,7 @@ function FormUpdate({ id, titleTask, dueDate, Description, Priority }) {
               name="dueDate"
               onChange={handleTaskupDate}
               value={taskUpdate.dueDate}
+              min="2022-06-02"
             />
           </div>
           <div className="Priority col-6">
