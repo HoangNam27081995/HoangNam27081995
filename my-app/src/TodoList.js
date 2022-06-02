@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import "./TodoList.css";
-import { useSelector , useDispatch } from "react-redux";
-import {toDotaskSlice} from "./store/taskSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { toDotaskSlice } from "./store/taskSlice";
+import FormUpdate from "./FormUpdate";
 
 function TodoList() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const listTask = useSelector((state) => state.taskSlice);
   console.log(listTask);
-  const handleRemove = (id)=>{
-    dispatch(toDotaskSlice.deleteTodo(id))
-  }
-  const [checkShowDetail,setCheckShowDetail] =useState(false);
-  const handleShowDetail = ()=>{
-    setCheckShowDetail(true);
-  }
+  const handleRemove = (id) => {
+    dispatch(toDotaskSlice.deleteTodo(id));
+  };
+  const handleShowDetail = (id) => {
+    dispatch(toDotaskSlice.updateShowupdate(id));
+  };
+  const handleChecked = (id) => {
+    dispatch(toDotaskSlice.updateCheckedTodo(id));
+  };
   return (
     <>
       <input
@@ -23,11 +26,42 @@ function TodoList() {
       />
       {listTask.map((item, index) => {
         return (
-          <div className="row itemTodo mt-3" key={index} >
-            <input type="checkbox" name="" id="" className="col-2"/>
-            <span className="col-3">{item.titleTask}</span>
-            <button className="btn btn-primary col-2 m-2" onClick={handleShowDetail}>Detail</button>
-            <button className="btn btn-danger col-2 m-2" onClick={()=>handleRemove(item.id)}>Remove</button>
+          <div key={index}>
+            <div
+              className="row itemTodo mt-3"
+              style={{ backgroundColor: item.checked ? "gray" : "white" }}
+            >
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                className="col-2"
+                onChange={() => handleChecked(item.id)}
+              />
+              <span className="col-3">{item.titleTask}</span>
+              <button
+                className="btn btn-primary col-2 m-2"
+                disabled={item.checked ? true : false}
+                onClick={() => handleShowDetail(item.id)}
+              >
+                {item.checked ? "Done" : "Detail"}
+              </button>
+              <button
+                className="btn btn-danger col-2 m-2"
+                onClick={() => handleRemove(item.id)}
+              >
+                Remove
+              </button>
+            </div>
+            {item.checkedDetail ? (
+              <FormUpdate
+                id={item.id}
+                titleTask={item.titleTask}
+                dueDate={item.dueDate}
+                Priority={item.Priority}
+                Description={item.Description}
+              />
+            ) : null}
           </div>
         );
       })}
